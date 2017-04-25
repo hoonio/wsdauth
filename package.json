@@ -1,0 +1,26 @@
+{
+  "name": "wsdauth",
+  "version": "1.0.0",
+  "description": "Authentication module for wallstreetdocs.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoonio/wsdauth.git"
+  },
+  "keywords": [
+    "oauth"
+  ],
+  "author": "Hoonio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoonio/wsdauth/issues"
+  },
+  "homepage": "https://github.com/hoonio/wsdauth#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
