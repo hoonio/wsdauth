@@ -9,13 +9,15 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">WCD Auth</a>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </nav>
 
-    <div id="app">
+    <div id="app" class="container">
       {{#if loggedin}}
         <h1>You are now logged in</h1>
-        {{user}}
+        <div id="user" style="margin-top:50px;">
+          {{user}}
+        </div>
       {{else}}
         <h1>Welcome! Please sign in!</h1>
         <button onclick="window.location.href='/login'">Authenticate</button>
@@ -31,6 +33,16 @@
         </div>
       </div><!-- /.container-fluid -->
     </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/jquery.profile.js"></script>
+    {{#if loggedin}}
+      <script>
+        $(document).ready( function() {
+          $('#user').renderProfile();
+        });
+      </script>
+    {{/if}}
 
   </body>
 </html>

@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -16,6 +15,7 @@ app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static('public'));
 
 app.get('/', passport.authenticate('oauth2', { session: false, failureRedirect: '/login' }), (req, res) => {
   console.log('login callback: '+req.user);
@@ -30,12 +30,12 @@ app.get('/profile', (req, res) => {
     'Cache-Control': 'no-cache'
   }})
   .then((res) => {
-    console.log(res.status)
-    // check res.status, place redirect to login on 401
+    if (res.status == 401) {
+      res.redirect('/login');
+    }
     return res.text();
   })
   .then((json) => {
-    console.log(json)
     res.render('../index.handlebars', {
       loggedin: true,
       user: json
