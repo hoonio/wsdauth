@@ -17,12 +17,11 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get('/', passport.authenticate('oauth2', { session: false }),
-  function(req, res) {
-    console.log('login callback: '+req.user);
-    res.cookie('auth', req.user);
-    res.redirect('/profile');
-  });
+app.get('/', passport.authenticate('oauth2', { session: false, failureRedirect: '/login' }), (req, res) => {
+  console.log('login callback: '+req.user);
+  res.cookie('auth', req.user);
+  res.redirect('/profile');
+});
 
 app.get('/profile', (req, res) => {
   console.log('Token: ' + req.cookies.auth)
@@ -44,19 +43,18 @@ app.get('/profile', (req, res) => {
   })
 });
 
+app.get('/login', (req, res) => {
+  res.render('../index.handlebars', {
+    loggedin: false
+  });
+})
+
 app.get('*', (req, res) => {
-  if (!req.cookies.auth && !req.query.code) {
-    // res.sendFile(path.join( __dirname, './profile.html'));
-    res.render('../index.handlebars', {
-      loggedin: false
-    });
-  } else {
     if (req.query.code) {
       console.log(req.query.code);
       res.cookie('auth', req.query.code);
     }
     res.redirect('/profile');
-  }
 });
 
 app.set('port', port);
