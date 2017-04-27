@@ -17,7 +17,12 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get('/login', passport.authenticate('oauth2'));
+app.get('/', passport.authenticate('oauth2', { session: false }),
+  function(req, res) {
+    console.log('login callback: '+req.user);
+    res.cookie('auth', req.user);
+    res.redirect('/profile');
+  });
 
 app.get('/profile', (req, res) => {
   console.log('Token: ' + req.cookies.auth)

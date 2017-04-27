@@ -9,7 +9,7 @@ passport.use(new OAuth2Strategy({
     callbackURL: "http://localhost:3000"
   },
   (accessToken, refreshToken, profile, cb) => {
-    User.findOrCreate({ exampleId: profile.id }, (err, user) => cb(err, user) );
+    return cb(null, accessToken);
   }
 ));
 
