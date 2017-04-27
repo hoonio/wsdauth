@@ -4,16 +4,13 @@
   </head>
   <body>
     <div id="app">
-      <!-- <h1>Welcome! Please sign in!</h1>
-      <form action="/login" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" placeholder="Username">
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
-      </form> -->
-      {{body}}
-      <button onclick="window.location.href='/login'">Authenticate</button>
+      {{#if loggedin}}
+        <h1>You are now logged in</h1>
+        {{user}}
+      {{else}}
+        <h1>Welcome! Please sign in!</h1>
+        <button onclick="window.location.href='/login'">Authenticate</button>
+      {{/if}}
     </div>
   </body>
 </html>
