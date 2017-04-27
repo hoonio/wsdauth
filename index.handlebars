@@ -9,7 +9,10 @@
         {{user}}
       {{else}}
         <h1>Welcome! Please sign in!</h1>
-        <button onclick="window.location.href='/login'">Authenticate</button>
+        <form action="/" method="post">
+          <button type="submit">post</button>
+        </form>
+        <button onclick="window.location.href='/?code=login'">Authenticate</button>
       {{/if}}
     </div>
   </body>

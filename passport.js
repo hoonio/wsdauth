@@ -9,6 +9,7 @@ passport.use(new OAuth2Strategy({
     callbackURL: "http://localhost:3000"
   },
   (accessToken, refreshToken, profile, cb) => {
+    console.log('callback: '+accessToken)
     return cb(null, accessToken);
   }
 ));
